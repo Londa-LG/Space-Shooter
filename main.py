@@ -10,7 +10,7 @@ running = True
 dt = 0
 
 p1 = Player(screen)
-e1 = Chaser(screen,p1)
+e2 = Shooter(screen,p1)
 
 while running:
     for event in pygame.event.get():
@@ -20,7 +20,7 @@ while running:
     screen.fill("black")
 
     p1.update()
-    e1.update()
+    e2.update()
 
     pygame.display.flip()
 

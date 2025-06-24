@@ -1,7 +1,39 @@
 import pygame
 
+class Enemy_Projectile:
+    def __init__(self):
+        pass
+
+class Player_Projectile:
+    def __init__(self):
+        pass
+
+class Shooter:
+    speed = 2
+    
+    def __init__(self,screen,target):
+        self.target = target
+        self.screen = screen
+        self.surface = pygame.Surface((30,30))
+        self.surface.fill("yellow")
+        self.rect = self.surface.get_rect()
+
+    def chase(self):
+        pass
+
+    def shoot(self):
+        pass
+
+    def display(self):
+        self.screen.blit(self.surface, self.rect)
+
+    def update(self):
+        self.chase()
+        self.shoot()
+        self.display()
+
 class Chaser:
-    speed = 7
+    speed = 3
 
     def __init__(self,screen,target):
         self.target = target
@@ -11,9 +43,24 @@ class Chaser:
         self.rect = self.surface.get_rect()
 
     def chase(self):
-        # chase after self.target
-        pass
-
+        if self.target.rect.centerx < self.rect.centerx:
+            self.rect.centerx = self.rect.centerx - self.speed
+            if self.target.rect.centery < self.rect.centery:
+                self.rect.centery = self.rect.centery - self.speed
+            elif self.target.rect.centery > self.rect.centery:
+                self.rect.centery = self.rect.centery + self.speed
+        elif self.target.rect.centerx > self.rect.centerx:
+            self.rect.centerx = self.rect.centerx + self.speed
+            if self.target.rect.centery < self.rect.centery:
+                self.rect.centery = self.rect.centery - self.speed
+            elif self.target.rect.centery > self.rect.centery:
+                self.rect.centery = self.rect.centery + self.speed
+        else:
+            if self.target.rect.centery < self.rect.centery:
+                self.rect.centery = self.rect.centery - self.speed
+            elif self.target.rect.centery > self.rect.centery:
+                self.rect.centery = self.rect.centery + self.speed
+            
     def display(self):
         self.screen.blit(self.surface, self.rect)
 
@@ -29,6 +76,9 @@ class Player:
         self.surface = pygame.Surface((60,60))
         self.surface.fill("orange")
         self.rect = self.surface.get_rect(midbottom =(300,300))
+
+    def shoot(self):
+        pass
 
     def update(self):
         # Detect keyboard input
